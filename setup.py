@@ -27,9 +27,14 @@ class TestCommand(Command):
 
         for rst in glob(pjoin('tests', '*.rst')):
             doctest.testfile(rst)
-
-        p = subprocess.Popen(args=["python","tests/RunAllDoctests.py"])
-        p.wait()
+        
+        print "\nrunning doctest"
+        doctests = subprocess.Popen(args=["python","tests/RunAllDoctests.py"])
+        doctests.wait()
+        
+        print "\nrunning unit test\n"
+        tests = subprocess.Popen(args=["python","tests/TestSuite.py"])
+        tests.wait()
 
 
 cmdclass = {'test': TestCommand}
