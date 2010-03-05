@@ -14,15 +14,6 @@ def transl(t_x, t_y, t_z):
     INPUT: ``t_x, t_y, t_z`` - coordinates of the translation vector in 3d space
 
     OUTPUT: Homogeneous matrix of the translation
-
-    Example:
-
-    >>> transl(1., 2., 3.)
-    array([[ 1.,  0.,  0.,  1.],
-           [ 0.,  1.,  0.,  2.],
-           [ 0.,  0.,  1.,  3.],
-           [ 0.,  0.,  0.,  1.]])
-
     """
     return array(
         [[ 1. , 0., 0., t_x],
@@ -35,15 +26,6 @@ def rotzyx(angle_z, angle_y, angle_x):
     """homogeneous transformation matrix from pitch-roll-yaw angles
     
     In short:  R = Rz * Ry * Rx
-
-    **Example:**
-
-    >>> rotzyx(3.14/6, 3.14/4, 3.14/3)
-    array([[ 0.61271008,  0.27992274,  0.73907349,  0.        ],
-           [ 0.35353151,  0.73930695, -0.57309746,  0.        ],
-           [-0.70682518,  0.61242835,  0.35401931,  0.        ],
-           [ 0.        ,  0.        ,  0.        ,  1.        ]])
-
     """
     
     sz = sin(angle_z)
@@ -64,14 +46,6 @@ def rotzy(angle_z, angle_y):
     
     In short:  R = Rz * Ry
 
-    Example:
-
-    >>> rotzy(3.14/6, 3.14/4)
-    array([[ 0.61271008, -0.4997701 ,  0.61222235,  0.        ],
-           [ 0.35353151,  0.86615809,  0.35325009,  0.        ],
-           [-0.70682518,  0.        ,  0.70738827,  0.        ],
-           [ 0.        ,  0.        ,  0.        ,  1.        ]])
-
     """
     sz = sin(angle_z)
     cz = cos(angle_z)
@@ -88,14 +62,6 @@ def rotzx(angle_z, angle_x):
     """homogeneous transformation matrix from pitch-roll-yaw angles)
     
     In short:  R = Rz * Rx
-
-    **Example:**
-
-    >>> rotzx(3.14/6, 3.14/3)
-    array([[ 0.86615809, -0.25011479,  0.43268088,  0.        ],
-           [ 0.4997701 ,  0.43347721, -0.74988489,  0.        ],
-           [ 0.        ,  0.86575984,  0.50045969,  0.        ],
-           [ 0.        ,  0.        ,  0.        ,  1.        ]])
 
     """
     sz = sin(angle_z)
@@ -114,14 +80,6 @@ def rotyx(angle_y, angle_x):
     
     In short:  R = Ry * Rx
 
-    **Example:**
-
-    >>> rotyx(3.14/4, 3.14/3)
-    array([[ 0.70738827,  0.61194086,  0.35373751,  0.        ],
-           [ 0.        ,  0.50045969, -0.86575984,  0.        ],
-           [-0.70682518,  0.61242835,  0.35401931,  0.        ],
-           [ 0.        ,  0.        ,  0.        ,  1.        ]])
-
     """
     sy = sin(angle_y)
     cy = cos(angle_y)
@@ -136,14 +94,6 @@ def rotyx(angle_y, angle_x):
 def rotx(angle):
     """
     Homogeneous matrix of a rotation around the x-axis
-   
-    Example:
-
-    >>> rotx(3.14/6)
-    array([[ 1.        ,  0.        ,  0.        ,  0.        ],
-           [ 0.        ,  0.86615809, -0.4997701 ,  0.        ],
-           [ 0.        ,  0.4997701 ,  0.86615809,  0.        ],
-           [ 0.        ,  0.        ,  0.        ,  1.        ]])
 
     """
     ca = cos(angle)
@@ -159,14 +109,6 @@ def roty(angle):
     """
     Homogeneous matrix of a rotation around the y-axis
 
-    Example:
-
-    >>> roty(3.14/6)
-    array([[ 0.86615809,  0.        ,  0.4997701 ,  0.        ],
-           [ 0.        ,  1.        ,  0.        ,  0.        ],
-           [-0.4997701 ,  0.        ,  0.86615809,  0.        ],
-           [ 0.        ,  0.        ,  0.        ,  1.        ]])
-
     """
     ca = cos(angle)
     sa = sin(angle)
@@ -180,13 +122,6 @@ def roty(angle):
 def rotz(angle):
     """
     Rotation around the z-axis
-    example:
-
-    >>> rotz(3.14/6)
-    array([[ 0.86615809, -0.4997701 ,  0.        ,  0.        ],
-           [ 0.4997701 ,  0.86615809,  0.        ,  0.        ],
-           [ 0.        ,  0.        ,  1.        ,  0.        ],
-           [ 0.        ,  0.        ,  0.        ,  1.        ]])
 
     """
     ca = cos(angle)
@@ -222,19 +157,6 @@ def inv(H):
     """
     Invert an homogeneous matrix.
 
-    **Example:**
-
-    >>> H = array(
-    ...     [[ 0.70738827,  0.        , -0.70682518,  3.        ],
-    ...      [ 0.61194086,  0.50045969,  0.61242835,  4.        ],
-    ...      [ 0.35373751, -0.86575984,  0.35401931,  5.        ],
-    ...      [ 0.        ,  0.        ,  0.        ,  1.        ]])
-    >>> inv(H)
-    array([[ 0.70738827,  0.61194086,  0.35373751, -6.3386158 ],
-           [ 0.        ,  0.50045969, -0.86575984,  2.32696044],
-           [-0.70682518,  0.61242835,  0.35401931, -2.09933441],
-           [ 0.        ,  0.        ,  0.        ,  1.        ]])
-
     """
     assert ishomogeneousmatrix(H)
     R = H[0:3,0:3]
@@ -249,27 +171,6 @@ def adjoint(H):
     :type H: 4x4 ndarray
     :return: adjoint matrix
     :rtype: 6x6 ndarray
-
-    Example:
-
-    >>> H = array(
-    ...     [[ 0.70738827,  0.        , -0.70682518,  3.        ],
-    ...      [ 0.61194086,  0.50045969,  0.61242835,  4.        ],
-    ...      [ 0.35373751, -0.86575984,  0.35401931,  5.        ],
-    ...      [ 0.        ,  0.        ,  0.        ,  1.        ]])
-    >>> adjoint(H)
-    array([[ 0.70738827,  0.        , -0.70682518,  0.        ,  0.        ,
-             0.        ],
-           [ 0.61194086,  0.50045969,  0.61242835,  0.        ,  0.        ,
-             0.        ],
-           [ 0.35373751, -0.86575984,  0.35401931,  0.        ,  0.        ,
-             0.        ],
-           [-1.64475426, -5.96533781, -1.64606451,  0.70738827,  0.        ,
-            -0.70682518],
-           [ 2.47572882,  2.59727952, -4.59618383,  0.61194086,  0.50045969,
-             0.61242835],
-           [-0.9937305 ,  1.50137907,  4.66458577,  0.35373751, -0.86575984,
-             0.35401931]])
 
     """
     assert ishomogeneousmatrix(H), H
