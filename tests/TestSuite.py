@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import JointsTests
+import JointsTests, ConstraintsTests
 
-tests = unittest.TestSuite([JointsTests.ts])
+tests = unittest.TestSuite([JointsTests.ts, ConstraintsTests.ts])
 
 unittest.TextTestRunner(verbosity=2).run(tests)

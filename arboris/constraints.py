@@ -216,23 +216,6 @@ class BallAndSocketConstraint(Constraint):
         - ``vel``: `v^*`
         - ``admittance``: `Y`
         - ``dt``: `dt`
-
-        Tests:
-
-        >>> c = BallAndSocketConstraint(frames=(None, None))
-        >>> c._pos0 = array([0.1, 0.2, 0.3])
-        >>> c._force = array([-0.1, -0.2, -0.3])
-        >>> vel = zeros((3))
-        >>> adm = 0.5*eye(3)
-        >>> dt = 0.1
-        >>> dforce = c.solve(vel, adm, dt)
-        >>> c._pos0 + dt * ( vel + dot(adm, dforce) )
-        array([ 0.,  0.,  0.])
-        >>> vel = array([0.05, -0.05, 0.05])
-        >>> dforce = c.solve(vel, adm, dt)
-        >>> c._pos0 + dt * ( vel + dot(adm, dforce) )
-        array([ 0.,  0.,  0.])
-
         """
         dforce = -dot(pinv(admittance), vel + self._pos0/dt)
         self._force += dforce
