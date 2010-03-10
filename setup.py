@@ -24,15 +24,12 @@ class TestCommand(Command):
         Finds all the doctests files in both arboris/ and tests/ 
         and run them as a unittest test suite.
         '''
-
-        for rst in glob(pjoin('tests', '*.rst')):
-            doctest.testfile(rst)
         
-        print "\nrunning doctest"
+        print "\n**** doctest ****"
         doctests = subprocess.Popen(args=["python","tests/RunAllDoctests.py"])
         doctests.wait()
         
-        print "\nrunning unit test\n"
+        print "\n**** unit test ****\n"
         tests = subprocess.Popen(args=["python","tests/TestSuite.py"])
         tests.wait()
 
